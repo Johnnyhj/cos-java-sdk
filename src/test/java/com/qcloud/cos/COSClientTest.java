@@ -93,6 +93,7 @@ public class COSClientTest {
 			updateFileRequest.setContentDisposition("cos_sample.txt");
 			updateFileRequest.setContentLanguage("english");
 			updateFileRequest.setContentType("application/json");
+			updateFileRequest.setContentEncoding("gzip");
 			updateFileRequest.setXCosMeta("x-cos-meta-xxx", "xxx");
 			updateFileRequest.setXCosMeta("x-cos-meta-yyy", "yyy");
 			String updateFileRet = cosClient.updateFile(updateFileRequest);
@@ -114,6 +115,8 @@ public class COSClientTest {
 			assertThat(customHeadersJson.getString("Content-Disposition"), equalTo("cos_sample.txt"));
 			assertTrue(customHeadersJson.has("Content-Type"));
 			assertThat(customHeadersJson.getString("Content-Type"), equalTo("application/json"));
+			assertTrue(customHeadersJson.has("Content-Encoding"));
+			assertThat(customHeadersJson.getString("Content-Encoding"), equalTo("gzip"));
 			assertTrue(customHeadersJson.has("x-cos-meta-xxx"));
 			assertThat(customHeadersJson.getString("x-cos-meta-xxx"), equalTo("xxx"));
 			assertTrue(customHeadersJson.has("x-cos-meta-yyy"));
